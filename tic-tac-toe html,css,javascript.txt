@@ -1,0 +1,355 @@
+Building a Tic-Tac-Toe web application is a fun project to practice your HTML, CSS, and JavaScript skills. Below is a basic implementation of a two-player Tic-Tac-Toe game:
+
+HTML:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tic-Tac-Toe</h1>
+        <div id="board" class="board">
+            <!-- The game board will be generated here -->
+        </div>
+        <button id="reset-btn">Reset</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+CSS (styles.css):
+
+css
+Copy code
+.container {
+    text-align: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button {
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+JavaScript (script.js):
+
+javascript
+Copy code
+const board = document.getElementById('board');
+const resetButton = document.getElementById('reset-btn');
+let currentPlayer = 'X';
+let gameState = ['', '', '', '', '', '', '', '', ''];
+
+function handleCellClick(index) {
+    if (gameState[index] !== '' || checkWinner()) return;
+    gameState[index] = currentPlayer;
+    renderBoard();
+    if (!checkWinner() && !checkDraw()) {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+}
+
+function renderBoard() {
+    board.innerHTML = '';
+    gameState.forEach((cell, index) => {
+        const cellElement = document.createElement('div');
+        cellElement.classList.add('cell');
+        cellElement.textContent = cell;
+        cellElement.addEventListener('click', () => handleCellClick(index));
+        board.appendChild(cellElement);
+    });
+}
+
+function checkWinner() {
+    const winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    return winningConditions.some((condition) => {
+        const [a, b, c] = condition;
+        return gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c];
+    });
+}
+
+function checkDraw() {
+    return gameState.every(cell => cell !== '');
+}
+
+function resetGame() {
+    currentPlayer = 'X';
+    gameState = ['', '', '', '', '', '', '', '', ''];
+    renderBoard();
+}
+
+resetButton.addEventListener('click', resetGame);
+
+renderBoard();Building a Tic-Tac-Toe web application is a fun project to practice your HTML, CSS, and JavaScript skills. Below is a basic implementation of a two-player Tic-Tac-Toe game:
+
+HTML:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tic-Tac-Toe</h1>
+        <div id="board" class="board">
+            <!-- The game board will be generated here -->
+        </div>
+        <button id="reset-btn">Reset</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+CSS (styles.css):
+
+css
+Copy code
+.container {
+    text-align: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button {
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+JavaScript (script.js):
+
+javascript
+Copy code
+const board = document.getElementById('board');
+const resetButton = document.getElementById('reset-btn');
+let currentPlayer = 'X';
+let gameState = ['', '', '', '', '', '', '', '', ''];
+
+function handleCellClick(index) {
+    if (gameState[index] !== '' || checkWinner()) return;
+    gameState[index] = currentPlayer;
+    renderBoard();
+    if (!checkWinner() && !checkDraw()) {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+}
+
+function renderBoard() {
+    board.innerHTML = '';
+    gameState.forEach((cell, index) => {
+        const cellElement = document.createElement('div');
+        cellElement.classList.add('cell');
+        cellElement.textContent = cell;
+        cellElement.addEventListener('click', () => handleCellClick(index));
+        board.appendChild(cellElement);
+    });
+}
+
+function checkWinner() {
+    const winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    return winningConditions.some((condition) => {
+        const [a, b, c] = condition;
+        return gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c];
+    });
+}
+
+function checkDraw() {
+    return gameState.every(cell => cell !== '');
+}
+
+function resetGame() {
+    currentPlayer = 'X';
+    gameState = ['', '', '', '', '', '', '', '', ''];
+    renderBoard();
+}
+
+resetButton.addEventListener('click', resetGame);
+
+renderBoard();Building a Tic-Tac-Toe web application is a fun project to practice your HTML, CSS, and JavaScript skills. Below is a basic implementation of a two-player Tic-Tac-Toe game:
+
+HTML:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tic-Tac-Toe</h1>
+        <div id="board" class="board">
+            <!-- The game board will be generated here -->
+        </div>
+        <button id="reset-btn">Reset</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+CSS (styles.css):
+
+css
+Copy code
+.container {
+    text-align: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button {
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+JavaScript (script.js):
+
+javascript
+Copy code
+const board = document.getElementById('board');
+const resetButton = document.getElementById('reset-btn');
+let currentPlayer = 'X';
+let gameState = ['', '', '', '', '', '', '', '', ''];
+
+function handleCellClick(index) {
+    if (gameState[index] !== '' || checkWinner()) return;
+    gameState[index] = currentPlayer;
+    renderBoard();
+    if (!checkWinner() && !checkDraw()) {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+}
+
+function renderBoard() {
+    board.innerHTML = '';
+    gameState.forEach((cell, index) => {
+        const cellElement = document.createElement('div');
+        cellElement.classList.add('cell');
+        cellElement.textContent = cell;
+        cellElement.addEventListener('click', () => handleCellClick(index));
+        board.appendChild(cellElement);
+    });
+}
+
+function checkWinner() {
+    const winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    return winningConditions.some((condition) => {
+        const [a, b, c] = condition;
+        return gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c];
+    });
+}
+
+function checkDraw() {
+    return gameState.every(cell => cell !== '');
+}
+
+function resetGame() {
+    currentPlayer = 'X';
+    gameState = ['', '', '', '', '', '', '', '', ''];
+    renderBoard();
+}
+
+resetButton.addEventListener('click', resetGame);
+
+renderBoard();VVVVVV
